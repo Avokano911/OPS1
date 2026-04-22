@@ -11,8 +11,12 @@ void* validate_uniquness(void* arg);
 int **matrix;
 int n;
 int score = 0;
+int magic_val = 0;
+magic_val = n * (n * n + 1) / 2;
 pthread_mutex_t lock;
 pthread_t thread1;
+
+
 
 
 int main(int argc, char *argv[]) {
