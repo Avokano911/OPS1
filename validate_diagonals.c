@@ -7,6 +7,9 @@
 int leftup_to_rightdown = 0;
 int rightup_to_leftdown = 0;
 
+int diagonal_result[2];
+int counts = 0;
+
 void* validate_diagonals(void* arg);
 
 void* validate_diagonals(void* arg){
@@ -18,6 +21,8 @@ void* validate_diagonals(void* arg){
 
     }
 
+    sleep(1);
+
     if (leftup_to_rightdown == magic_val) {
 
         pthread_mutex_lock(&lock);
@@ -25,6 +30,9 @@ void* validate_diagonals(void* arg){
         score = score + 1;
 
         pthread_mutex_unlock(&lock);
+
+        diagonal_result[counts] = 1;
+        counts++;
 
     } else {
 
@@ -38,6 +46,9 @@ void* validate_diagonals(void* arg){
 
             pthread_mutex_unlock(&lock);
 
+            diagonal_result[counts] = 0;
+            counts++;
+
         }
 
 
@@ -48,6 +59,9 @@ void* validate_diagonals(void* arg){
         score = score + 1;
 
         pthread_mutex_unlock(&lock);
+
+        diagonal_result[counts] = 1;
+        counts++;
         
 
     } else {
@@ -61,6 +75,9 @@ void* validate_diagonals(void* arg){
             }
 
             pthread_mutex_unlock(&lock);
+
+            diagonal_result[counts] = 0;
+            counts++;
 
         }
 

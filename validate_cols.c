@@ -3,6 +3,9 @@
 
 #include "Assignment.c"
 
+int col_result[n];
+int counts = 0;
+
 void* validate_cols(void* arg);
 
 void* validate_cols(void* arg){
@@ -17,13 +20,19 @@ void* validate_cols(void* arg){
 
         }
 
+        sleep(1);
+
         if( magic_val == sum_cols ){
 
             pthread_mutex_lock(&lock);
 
             score = score + 1;
-
+            
+                
             pthread_mutex_unlock(&lock);
+
+            col_result[counts] = 1;
+            counts++;
 
         } else {
 
@@ -32,9 +41,14 @@ void* validate_cols(void* arg){
             if ( score > 0 ) {
 
                 score = score - 1;
+
             }
 
+
             pthread_mutex_unlock(&lock);
+
+            col_result[counts] = 1;
+            counts++;
 
         }
     }

@@ -34,11 +34,13 @@ void* validate_uniquness(void* arg){
         }
     }
 
-
+    sleep(1);
+    
     pthread_mutex_lock(&lock);
     if (status == 1) {
 
         score = score + 1;
+
 
     } else {
 

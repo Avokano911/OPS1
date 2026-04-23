@@ -57,7 +57,123 @@ int main(int argc, char *argv[]) {
         printf("\n");
     }
 
+    // initialize mutex
     pthread_mutex_init(&lock, NULL);
     
 
+    // creatinng thread to run
+    pthread_t thread1, thread2, thread3, thread4;
+
+    pthread_create(&thread1, NULL, validate_cols, NULL);
+    pthread_create(&thread2, NULL, validate_rows, NULL);
+    pthread_create(&thread3, NULL, validate_diagonals, NULL);
+    pthread_create(&thread4, NULL, validate_uniquness, NULL);
+
+    // Wait for thread to finish
+    pthread_join(thread1, NULL);
+    pthread_join(thread2, NULL);
+    pthread_join(thread3, NULL);
+    pthread_join(thread4, NULL);
+
+    printf("\n----- Magic Square Report ----\n");
+
+    // Rows check
+    //row_result[]
+    int result = 1;
+    for (int i=0; i < n; i++){
+
+        if (row_result[i] == 0){
+
+            printf(" Raw %d Invalid\n", i + 1);
+            result = 0;
+        }
+    }
+
+    if (result == 1){
+
+        printf(" All Valid\n");
+    }
+
+    // Cols check
+    //cols_result[]
+    int result = 1;
+    for(int i = 0; i < n; i++){
+
+        if (cols_result[i] == 0){
+
+            printf(" Col %d Invalid\n", i + 1);
+            result = 0;
+        }
+    }
+
+    if ( result == 1) {
+
+        printf(" All Valid\n", i);
+        result = 0;
+
+    }
+
+    // validate diagonals check
+    int result = 1;
+
+    // Main (leftup to rightdown)
+    //diagonal_result[0];
+
+    if ( diagonal_result[0] == 0){
+
+        printf(" Main Diag Invalid");
+        result = 0;
+    }
+
+    if ( diagonal_result[1] == 0){
+
+        printf( " Second Diag Invalid");
+        result = 0;
+    }
+
+    if ( result == 1) {
+
+        printf(" All Valid\n");
+
+    }
+
+    // uniqueness check
+
+    int result = 1;
+
+    for (int i=0; i < n; i++){
+        
+        if (C_val[i] == 0){
+
+            printf(" Faild ( Duplicates found )\n");
+            result = 0;
+        } 
+    }
+
+    if (result == 1){
+
+        printf(" Passed \n");
+
+    }
+
+    // Final Score 
+
+    int Final_Maximum_S = (n * 2) + 2 + 1; 
+
+    printf( "Final Score: %d / %d ", score, Final_Maximum_S);
+
+    // RESULT
+
+    if ( score == Final_Maximum_S ){
+
+        printf(" VALID MAGIC SQUARE ");
+
+    } else {
+
+        printf(" INVALID MAGIC SQUARE ");
+
+    }
+
+
+    
 }

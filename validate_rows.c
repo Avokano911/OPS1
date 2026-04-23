@@ -1,5 +1,8 @@
 // validate_rows function
-//#include "Assignment.c"
+#include "Assignment.c"
+
+int row_result[n];
+int counts = 0;
 
 void* validate_rows(void* arg);
 
@@ -15,6 +18,8 @@ void* validate_rows(void* arg){
             row_sum = row_sum + matrix[i][j];
         }
 
+        sleep(1);
+
         // compare with the magic val
         if(magic_val == row_sum){
 
@@ -28,6 +33,9 @@ void* validate_rows(void* arg){
             // unlock it 
             pthread_mutex_unlock(&lock);
 
+            row_result[counts] = 1;
+            counts++;
+
         } else {
 
             pthread_mutex_lock(&lock);
@@ -40,11 +48,16 @@ void* validate_rows(void* arg){
 
             pthread_mutex_unlock(&lock);
 
+            row_result[counts] = 0;
+            counts++;
+
         }
 
         
+        
 
         
-    }
+    } 
+    return NULL;
     
 }
