@@ -1,9 +1,7 @@
-// validate_rows function
-#include <stddef.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <pthread.h>
-#include <unistd.h>
+/* ***************************
+* Kanon Fujishima            *
+* ID : 21873542              *
+* ****************************/
 
 int row_result[500];
 
@@ -27,33 +25,28 @@ void* validate_rows(void* arg){
         // compare with the magic val
         if(magic_val == row_sum){
 
-            // mutex update the score 
-
-            // lock it first to prevent multiple jobs running
+            
             pthread_mutex_lock(&lock);
 
             score = score + 1;
 
-            // unlock it 
+            
             pthread_mutex_unlock(&lock);
 
             row_result[counts] = 1;
-            //counts++;
+    
 
         } else {
 
             pthread_mutex_lock(&lock);
 
-            //f (score > 0) {
 
-                score = score - 1;
+               row_result[counts] = 0;
         
-
-            //}
 
             pthread_mutex_unlock(&lock);
 
-            row_result[counts] = 0;
+            
 
         }
         counts++;

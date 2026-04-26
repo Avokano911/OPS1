@@ -1,15 +1,19 @@
+/* ***************************
+* Kanon Fujishima            *
+* ID : 21873542              *
+* ****************************/
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-#include <unistd.h>
+#include <unistd.h> // for sleep
+
 // global variables
 int **matrix;
 int n;
 int score = 0;
 int magic_val = 0;
 pthread_mutex_t lock;
-pthread_t thread1;
 
 #include "validate_uniquness.c"
 #include "validate_diagonals.c"
@@ -92,8 +96,7 @@ int main(int argc, char *argv[]) {
 
     printf("\n----- Magic Square Report ----\n");
 
-    // Rows check
-    //row_result[]
+
     int result = 1;
     for (int i=0; i < n; i++){
 
@@ -109,8 +112,6 @@ int main(int argc, char *argv[]) {
         printf(" Rows:   All Valid\n");
     }
 
-    // Cols check
-    //cols_result[]
     result = 1;
     for(int i = 0; i < n; i++){
 
@@ -131,8 +132,6 @@ int main(int argc, char *argv[]) {
     // validate diagonals check
     result = 1;
 
-    // Main (leftup to rightdown)
-    //diagonal_result[0];
 
     if ( diagonal_result[0] == 0){
 
@@ -160,7 +159,6 @@ int main(int argc, char *argv[]) {
         
         if (C_val[i] == 0){
 
-            //printf(" Unique: Faild ( Duplicates found ) at %d\n", C_val[i]);
             result = 0;
             break;
             
@@ -199,3 +197,8 @@ int main(int argc, char *argv[]) {
 
     
 }
+
+
+
+
+

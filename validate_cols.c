@@ -1,5 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
+/* ***************************
+* Kanon Fujishima            *
+* ID : 21873542              *
+* ****************************/
 
 int col_result[100];
 
@@ -31,23 +33,20 @@ void* validate_cols(void* arg){
             pthread_mutex_unlock(&lock);
 
             col_result[counts] = 1;
-            //counts++;
+            
 
         } else {
 
             pthread_mutex_lock(&lock);
 
-            //if ( score > 0 ) {
-
-                //score = score - 1;
+            
                 col_result[counts] = 0;
-            //
+            
 
 
             pthread_mutex_unlock(&lock);
 
-            //col_result[counts] = 1;
-            //counts++;
+            
 
         }
         counts++;

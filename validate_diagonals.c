@@ -1,3 +1,9 @@
+/* ***************************
+* Kanon Fujishima            *
+* ID : 21873542              *
+* ****************************/
+
+
 // validate_diagonals function
 
 
@@ -34,15 +40,7 @@ int rightup_to_leftdown = 0;
 
     } else {
 
-            pthread_mutex_lock(&lock);
-
-            if (score > 0) {
-
-                score = score - 1;
-
-            }
-
-            pthread_mutex_unlock(&lock);
+            
 
             diagonal_result[counts] = 0;
             counts++;
@@ -64,15 +62,7 @@ int rightup_to_leftdown = 0;
 
     } else {
 
-            pthread_mutex_lock(&lock);
-
-            if (score > 0) {
-
-                score = score - 1;
-
-            }
-
-            pthread_mutex_unlock(&lock);
+            
 
             diagonal_result[counts] = 0;
             counts++;

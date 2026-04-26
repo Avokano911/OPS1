@@ -1,8 +1,13 @@
 
 
+/* ***************************
+* Kanon Fujishima            *
+* ID : 21873542              *
+* ****************************/
+
 
 //  The numbers should be n^2 (if n = 3 , I have numbers 1 to 9)
-//int size = n * n;
+
 int C_val[500];
 
 void* validate_uniquness(void* arg){
@@ -10,8 +15,6 @@ void* validate_uniquness(void* arg){
     int size = n * n;
 
     // initialize with all 0
-
-    //int C_val[size + 1];
 
     for (int i = 0; i < size + 1; i++){
         
@@ -28,12 +31,12 @@ void* validate_uniquness(void* arg){
 
             if ( curr < 1 || curr > size + 1){
 
-                status = 0; // false
+                status = 0; 
                 C_val[curr] = curr;
 
             } else if ( C_val[curr] == 1){
 
-                // already have seen
+                
                 status = 0;
 
             } else {
@@ -52,14 +55,7 @@ void* validate_uniquness(void* arg){
         score = score + 1;
 
 
-    } else {
-
-        if (score > 0) {
-
-            //score = score - 1;
-        }
-
-    }
+    } 
     pthread_mutex_unlock(&lock);
 
     return NULL;
