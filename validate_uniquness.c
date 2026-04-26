@@ -1,14 +1,23 @@
-#include "Assignment.c"
+
 
 
 //  The numbers should be n^2 (if n = 3 , I have numbers 1 to 9)
-void* validate_uniquness(void* arg);
+//int size = n * n;
+int C_val[500];
 
 void* validate_uniquness(void* arg){
 
     int size = n * n;
 
-    int C_val[size + 1] = {0};
+    // initialize with all 0
+
+    //int C_val[size + 1];
+
+    for (int i = 0; i < size + 1; i++){
+        
+        C_val[i] == 0;
+
+    }
     
     int status = 1;
 
@@ -17,9 +26,10 @@ void* validate_uniquness(void* arg){
 
             int curr = matrix[i][j];
 
-            if ( curr < 1 || curr > size){
+            if ( curr < 1 || curr > size + 1){
 
                 status = 0; // false
+                C_val[curr] = curr;
 
             } else if ( C_val[curr] == 1){
 
@@ -46,7 +56,7 @@ void* validate_uniquness(void* arg){
 
         if (score > 0) {
 
-            score = score - 1;
+            //score = score - 1;
         }
 
     }

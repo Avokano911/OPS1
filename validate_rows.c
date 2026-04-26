@@ -1,13 +1,17 @@
 // validate_rows function
-#include "Assignment.c"
+#include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <unistd.h>
 
-int row_result[n];
-int counts = 0;
-
-void* validate_rows(void* arg);
+int row_result[500];
 
 void* validate_rows(void* arg){
 
+    
+    int counts = 0;
+    
     // calculate each of the loop
     for (int i = 0; i < n; i++){
 
@@ -34,24 +38,25 @@ void* validate_rows(void* arg){
             pthread_mutex_unlock(&lock);
 
             row_result[counts] = 1;
-            counts++;
+            //counts++;
 
         } else {
 
             pthread_mutex_lock(&lock);
 
-            if (score > 0) {
+            //f (score > 0) {
 
                 score = score - 1;
+        
 
-            }
+            //}
 
             pthread_mutex_unlock(&lock);
 
             row_result[counts] = 0;
-            counts++;
 
         }
+        counts++;
 
         
         

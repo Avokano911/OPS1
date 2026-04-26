@@ -1,18 +1,16 @@
 // validate_diagonals function
-#include <stdio.h>
-#include <stdlib.h>
-#include "Assignment.c"
 
 
+int diagonal_result[2];
+
+void* validate_diagonals(void* arg){
+
+       
 int leftup_to_rightdown = 0;
 int rightup_to_leftdown = 0;
 
-int diagonal_result[2];
-int counts = 0;
-
-void* validate_diagonals(void* arg);
-
-void* validate_diagonals(void* arg){
+    
+    int counts = 0;
 
     for (int i=0; i < n; i++){
         

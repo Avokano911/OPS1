@@ -1,16 +1,8 @@
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "validate_uniquness.c"
-#include "validate_diagonals.c"
-#include "validate_rows.c"
-#include "validate_cols.c"
-
-// pthread variables
-void* validate_rows(void* arg);
-void* validate_cols(void* arg);
-void* validate_diagonals(void* arg); // check two paralell lines
-void* validate_uniquness(void* arg);
-
+#include <pthread.h>
+#include <unistd.h>
 // global variables
 int **matrix;
 int n;
@@ -19,17 +11,25 @@ int magic_val = 0;
 pthread_mutex_t lock;
 pthread_t thread1;
 
-//
-extern int diagonal_result[];
-extern int col_result[];
-extern int row_result[];
-extern int C_val[];
+#include "validate_uniquness.c"
+#include "validate_diagonals.c"
+#include "validate_rows.c"
+#include "validate_cols.c"
+
+// 
+void* validate_rows(void* arg);
+void* validate_cols(void* arg);
+void* validate_diagonals(void* arg); // check two paralell lines
+void* validate_uniquness(void* arg);
+
+
+ 
 
 
 int main(int argc, char *argv[]) {
 
     if(argc < 2) {
-        printf("Invaild file name !", argv[0]);
+        printf("Please write the file name ! !" );
         return 1;
     }
 
@@ -43,11 +43,12 @@ int main(int argc, char *argv[]) {
     // reading n 
 
     fscanf(file, "%d", &n);
-    printf("The size is %d\n", &n);
+    printf("The size is %d\n", n);
 
     //  allocating memory and reading it into
     matrix = (int **)malloc(n * sizeof(int *));
     magic_val = n * (n * n + 1) / 2;
+
     // loopt n * n
     for(int i=0; i < n; i++){
         matrix[i] = (int *)malloc(n * sizeof(int));
@@ -83,10 +84,10 @@ int main(int argc, char *argv[]) {
     pthread_join(thread4, NULL);
 
     //print each thread completion
-    printf("Thread ID-[%lu] completed Rows\n", (unsigned long)thread1);
-    printf("Thread ID-[%lu] completed cols\n", (unsigned long)thread2);
-    printf("Thread ID-[%lu] completed diagonals\n", (unsigned long)thread3);
-    printf("Thread ID-[%lu] completed uniquness\n", (unsigned long)thread4);
+    printf("Thread ID-1: completed Rows\n");
+    printf("Thread ID-2: completed cols\n");
+    printf("Thread ID-3: completed diagonals\n");
+    printf("Thread ID-4: completed uniquness\n");
 
 
     printf("\n----- Magic Square Report ----\n");
@@ -113,7 +114,7 @@ int main(int argc, char *argv[]) {
     result = 1;
     for(int i = 0; i < n; i++){
 
-        if (cols_result[i] == 0){
+        if (col_result[i] == 0){
 
             printf(" Cols:    Col %d Invalid\n", i + 1);
             result = 0;
@@ -155,15 +156,22 @@ int main(int argc, char *argv[]) {
 
     result = 1;
 
-    for (int i=0; i < n; i++){
+    for (int i=1; i <= n * n; i++){
         
         if (C_val[i] == 0){
 
-            printf(" Unique: Faild ( Duplicates found )\n");
+            //printf(" Unique: Faild ( Duplicates found ) at %d\n", C_val[i]);
             result = 0;
+            break;
+            
         } 
     }
 
+    if (result == 0){
+
+        printf(" Unique: Filed (Duplicates found)\n");
+
+    }
     if (result == 1){
 
         printf(" Unique:  Passed \n");

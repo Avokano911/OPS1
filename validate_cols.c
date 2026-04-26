@@ -1,14 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "Assignment.c"
-
-int col_result[n];
-int counts = 0;
-
-void* validate_cols(void* arg);
+int col_result[100];
 
 void* validate_cols(void* arg){
+
+
+    int counts = 0;
+    
 
     for (int j=0; j < n; j++){
 
@@ -16,7 +15,7 @@ void* validate_cols(void* arg){
 
         for (int i=0; i < n; i++){
 
-             sum_cols = sum_cols + matrix[i][j];
+             sum_cols += matrix[i][j];
 
         }
 
@@ -32,25 +31,26 @@ void* validate_cols(void* arg){
             pthread_mutex_unlock(&lock);
 
             col_result[counts] = 1;
-            counts++;
+            //counts++;
 
         } else {
 
             pthread_mutex_lock(&lock);
 
-            if ( score > 0 ) {
+            //if ( score > 0 ) {
 
-                score = score - 1;
-
-            }
+                //score = score - 1;
+                col_result[counts] = 0;
+            //
 
 
             pthread_mutex_unlock(&lock);
 
-            col_result[counts] = 1;
-            counts++;
+            //col_result[counts] = 1;
+            //counts++;
 
         }
+        counts++;
     }
 
     return NULL;
